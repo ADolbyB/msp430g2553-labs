@@ -13,9 +13,9 @@ int sw2 = 0;                                        // switch 2: declares a swti
                                                     // overridden in line 26: "sw2 = P1IN"
 int main(void)
 {
-	WDTCTL = WDTPW | WDTHOLD;	                    // stop watchdog timer WDTCTL
+    WDTCTL = WDTPW | WDTHOLD;                       // stop watchdog timer WDTCTL
 
-	P1DIR = 0x00;                                  // port 1 all inputs set to zero: keep random output from happening
+    P1DIR = 0x00;                                   // port 1 all inputs set to zero: keep random output from happening
     P1DIR |= (BIT0 | BIT6);                         // set P1.0 and P1.6 as outputs (LED1, LED2)
     P1REN |= BIT3;                                  // activate resistor on P1.3 (Set BIT3 to HIGH)
     P1OUT |= BIT3;                                  // activate pull up resistor: SW2 is active low (Hardware on Board)
