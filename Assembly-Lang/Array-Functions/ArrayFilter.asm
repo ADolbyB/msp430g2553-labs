@@ -39,9 +39,9 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ; Main loop here
 ;-------------------------------------------------------------------------------
 ;
-; BEGIN Program:	Step 1: Setup 1 Unsorted Array and 1 copied array
+; BEGIN Program:    Step 1: Setup 1 Unsorted Array and 1 copied array
 
-REG         clr		R4					; Clear R4: points to UNSORTED array 1st index
+REG         clr     R4                  ; Clear R4: points to UNSORTED array 1st index
             clr     R5                  ; Clear R5: iterates UNSORTED array
             clr     R6                  ; Clear R6: Holds address for ARRAY1S[0]
             clr     R7                  ;
@@ -67,7 +67,7 @@ THEEND      jmp     THEEND              ; jump in place forever
 ; Define Array indices:
 SETARRAY    mov.w   #10, 0(R4)          ; index[0] Define 10 elements in the array
             mov.w   #4910, 2(R4)        ; index[1] Filter Threshold Value (in decimal)
-            mov.w	#0, 4(R4)           ; index[2] # of Filtered indices
+            mov.w   #0, 4(R4)           ; index[2] # of Filtered indices
             mov.w   #4910, 6(R4)        ; index[3] -> 1st array index
             mov.w   #4909, 8(R4)        ; index[4]
             mov.w   #4911, 10(R4)       ; index[5]
