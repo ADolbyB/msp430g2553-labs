@@ -46,7 +46,7 @@ LOOP        tst     R5                      ; check value in R5
 SKIP        jmp     LOOP                    ; keep looping
 
 DONE        jmp     DONE                    ; jump in place forever
-			;ret if a subroutine
+            ;ret if a subroutine
 
 ;-------------------------------------------------------------------------------
 ; Stack Pointer definition
