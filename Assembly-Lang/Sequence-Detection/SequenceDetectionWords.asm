@@ -46,7 +46,7 @@ LOOP        mov.w   R5, R6                  ; save R5 contents in R6 to be MASKE
             and.w   #0x01C7, R6             ; perform MASKING of the string pattern
             cmp.w   #0x0145, R6             ; SEARCH for String "101xxx101" = 0x0145 in R6
             jnz     SKIP                    ; SKIP if no match
-            inc.b	R11                     ; increment counter if there is a match
+            inc.b   R11                     ; increment counter if there is a match
 
 SKIP        rrc.w   R5                      ; Rotate Right the contents of R5 to be searched
             dec.b   R10                     ; decrement counter
