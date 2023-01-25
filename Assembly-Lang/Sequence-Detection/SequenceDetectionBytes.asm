@@ -36,25 +36,25 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ;
 ; Here, we are searching for a 5 bit string "01101" (5-bits) in the contents of R5
 ;
-START		mov.w	#0x0DA5, R5				; String to be searched: 0000 1101 1010 0101
-			mov.w	#0x0DA5, R8
+START       mov.w   #0x0DA5, R5             ; String to be searched: 0000 1101 1010 0101
+            mov.w   #0x0DA5, R8
 
-SEQ_DET		mov.b	#12, R10				; store # of iterations to RRC.W R5 (N = 16 - n + 1)
-			clr		R11						; zero out counter for # of string matches
+SEQ_DET     mov.b   #12, R10                ; store # of iterations to RRC.W R5 (N = 16 - n + 1)
+            clr     R11                     ; zero out counter for # of string matches
 
-LOOP		mov.b	R5, R6					; save R5 original contents (string to be searched) in R6 to be MASKED
-			and.b	#0x1F, R6				; perform MASKING of the string pattern - force all unwanted bits to 0
-			cmp.b	#0x0D, R6				; SEARCH for String "01101" = 0x0D in the MASKED Register
-			jnz		SKIP					; SKIP if no match
-			inc.b	R11						; increment counter if there is a match
+LOOP        mov.b   R5, R6                  ; save R5 original contents (string to be searched) in R6 to be MASKED
+            and.b   #0x1F, R6               ; perform MASKING of the string pattern - force all unwanted bits to 0
+            cmp.b   #0x0D, R6               ; SEARCH for String "01101" = 0x0D in the MASKED Register
+            jnz     SKIP                    ; SKIP if no match
+            inc.b   R11                     ; increment counter if there is a match
 
-SKIP		rrc.w	R5						; Rotate Right the contents of R5 to be searched
-			dec.b	R10						; decrement counter
-			jnz		LOOP					; jump if not at end of search string
+SKIP        rrc.w   R5                      ; Rotate Right the contents of R5 to be searched
+            dec.b   R10                     ; decrement counter
+            jnz     LOOP                    ; jump if not at end of search string
 
-Restore		mov.w	R8, R5					; Restore previous value to R5
-END			jmp		END						; jump in place forever
-			;ret	if subroutine
+Restore     mov.w   R8, R5                  ; Restore previous value to R5
+END         jmp     END                     ; jump in place forever
+            ;ret if subroutine
 ;-------------------------------------------------------------------------------
 ; Stack Pointer definition
 ;-------------------------------------------------------------------------------
