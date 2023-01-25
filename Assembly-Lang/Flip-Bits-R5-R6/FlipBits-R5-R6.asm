@@ -29,20 +29,20 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ; Main loop here
 ;-------------------------------------------------------------------------------
 
-			clr.w	R6						; clear R6 to zero
-			mov.w	#0xEDCB, R5				; copy EDCB to R5 for flipping
+            clr.w   R6                      ; clear R6 to zero
+            mov.w   #0xEDCB, R5             ; copy EDCB to R5 for flipping
 
-FLIP		mov.b	#16, R10				; move 16(dec) to R10 (as a counter)
+FLIP        mov.b   #16, R10                ; move 16(dec) to R10 (as a counter)
 
-LOOP		rlc.w	R5						; rotate left w/ carry R5
-			rrc.w	R6        				; rotate right from carry to R6
+LOOP        rlc.w   R5                      ; rotate left w/ carry R5
+            rrc.w   R6                      ; rotate right from carry to R6
 
-			dec.b	R10						; Loop condition
-			jnz		LOOP					; jump if not zero to 'LOOP'
+            dec.b   R10                     ; Loop condition
+            jnz     LOOP                    ; jump if not zero to 'LOOP'
 
-			mov.w	R6, R5					; move the flipped word back to R5
-DONE		jmp		DONE					; jump in place forever
-			;ret if subroutine				; return from subroutine
+            mov.w   R6, R5                  ; move the flipped word back to R5
+DONE        jmp     DONE                    ; jump in place forever
+            ;ret if subroutine              ; return from subroutine
 
 ;-------------------------------------------------------------------------------
 ; Stack Pointer definition
