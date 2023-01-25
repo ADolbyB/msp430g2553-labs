@@ -31,22 +31,22 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ; Main loop here
 ;-------------------------------------------------------------------------------
 ;
-			clr.w 	R5						; clear out R5 to 0000
-			mov.w	#0xEDCB, R5				; set value of R5
+            clr.w   R5                      ; clear out R5 to 0000
+            mov.w   #0xEDCB, R5             ; set value of R5
 
-COUNT		clr.w	R6
+COUNT       clr.w   R6
 
-LOOP		tst 	R5						; check value in R5
-			jeq		DONE					; jump if equal to 'DONE'
+LOOP        tst     R5                      ; check value in R5
+            jeq     DONE                    ; jump if equal to 'DONE'
 
-			rla.w	R5						; rotate left add: R5 value
-            jnc		SKIP					; jump if no carry to 'SKIP'
-            inc.b	R6						; increment counter in R6
+            rla.w   R5                      ; rotate left add: R5 value
+            jnc     SKIP                    ; jump if no carry to 'SKIP'
+            inc.b   R6                      ; increment counter in R6
 
-SKIP		jmp		LOOP					; keep looping
+SKIP        jmp     LOOP                    ; keep looping
 
-DONE		jmp		DONE					; jump in place forever
-			;ret as a subroutine
+DONE        jmp     DONE                    ; jump in place forever
+			;ret if a subroutine
 
 ;-------------------------------------------------------------------------------
 ; Stack Pointer definition
