@@ -11,7 +11,7 @@
 ; The # of iterations to rotate R5 are stored in R10
 ; The MASK is stored in R6 as a BYTE.
 ; The number of string matches are stored in R11
-; # of times to rotate right R5 = (16 bits - #bits in search sequence + 1)
+; # of times to rotate right R5 = (16 bits: # of bits in search sequence + 1)
 ;
 ;-------------------------------------------------------------------------------
             .cdecls C,LIST,"msp430.h"       ; Include device header file
@@ -36,24 +36,24 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 ;
 ; Here, we are searching for a 9 bit string "101xxx101" = 0x0145 (9 bits) in the contents of R5
 ;
-START		mov.w	#0xA28A, R5				;String to be searched: 1010 0010 1000 1010
-			mov.w	#0xA28A, R8				;Preserve original Register Value
+START       mov.w   #0xA28A, R5             ; String to be searched: 1010 0010 1000 1010
+            mov.w   #0xA28A, R8             ; Preserve original Register Value
 
-SEQ_DET		mov.b	#8, R10					;store # of iterations to RRC.W R5
-			clr		R11						;zero out counter for # of string matches
+SEQ_DET     mov.b   #8, R10                 ; store # of iterations to RRC.W R5
+            clr     R11                     ; zero out counter for # of string matches
 
-LOOP		mov.w	R5, R6					;save R5 contents in R6 to be MASKED
-			and.w	#0x01C7, R6				;perform MASKING of the string pattern
-			cmp.w	#0x0145, R6				;SEARCH for String "101xxx101" = 0x0145 in R6
-			jnz		SKIP					;SKIP if no match
-			inc.b	R11						;increment counter if there is a match
+LOOP        mov.w   R5, R6                  ; save R5 contents in R6 to be MASKED
+            and.w   #0x01C7, R6             ; perform MASKING of the string pattern
+            cmp.w   #0x0145, R6             ; SEARCH for String "101xxx101" = 0x0145 in R6
+            jnz     SKIP                    ; SKIP if no match
+            inc.b	R11                     ; increment counter if there is a match
 
-SKIP		rrc.w	R5						;Rotate Right the contents of R5 to be searched
-			dec.b	R10						;decrement counter
-			jnz		LOOP					;jump if not at end of search string
+SKIP        rrc.w   R5                      ; Rotate Right the contents of R5 to be searched
+            dec.b   R10                     ; decrement counter
+            jnz     LOOP                    ; jump if not at end of search string
 
-			mov.w	R8, R5					;Restore original value back to R5
-END			jmp		END						;jump in place forever
+            mov.w   R8, R5                  ; Restore original value back to R5
+END         jmp     END                     ; jump in place forever
                                             
 
 ;-------------------------------------------------------------------------------
