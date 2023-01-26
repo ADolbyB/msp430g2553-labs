@@ -75,7 +75,7 @@ LINED       mov.w   #5800h, &0200h          ; copy number 0x5800 to &0x0200
             mov.w   #0200h, R5              ; copy number to R5
             mov.w   #020Ah, SP              ; copy number to Stack Pointer
 
-LINEE		rrc.w	-4(SP)                  ; Rotate Right w/ Carry word to stack pointer
+LINEE       rrc.w   -4(SP)                  ; Rotate Right w/ Carry word to stack pointer
             push    4(R5)                   ; Push a 4 to the top of stack
             xor.w   -2(SP),R5               ; Bitwise XOR word -2 with value at top of stack
             and.w   SP,R5                   ; Bitwise AND word value at top of stack w/ R5
