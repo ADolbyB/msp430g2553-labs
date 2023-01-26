@@ -43,7 +43,7 @@ LINEB       mov.w   &0200h, R7              ; copy a word from &0200h to R7
 
 LINEC       mov.b   R7, R10                 ; Start accumulatior R10 with R7 value
             add.b   R8, R10                 ; add to it the content R8
-            add.b	R9, R10                 ; add to it the content R9
+            add.b   R9, R10                 ; add to it the content R9
             mov.w   R10,&0206h              ; now store the sum in L
 
 Mainloop    jmp     Mainloop                ; Loop in Place when done.
