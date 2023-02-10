@@ -42,7 +42,7 @@ REG         clr     R4                      ; Clear R4: points to UNSORTED array
             clr     R8                      ; SPARE
             clr     R9                      ; INNER loop counter
             clr     R10                     ; Clear R10: used as index counter
-			clr		R11                     ; Swap for smaller value
+            clr     R11                     ; Swap for smaller value
             clr     R12                     ; swap for larger value
 
 
