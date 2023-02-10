@@ -34,7 +34,7 @@ LINE_A      clr.w   SR                      ; clear SR to 0000
             clr.w   &0x0202                 ; clear contents of 0x0202h
             clr.w   &0x0204                 ; clear contents of 0x0204h
             clr.w   &0x0206                 ; clear contents of 0x0206h
-			clr.w	&0x0208                 ; clear contents of 0x0208h
+            clr.w   &0x0208                 ; clear contents of 0x0208h
             clr.w   &0x020A                 ; clear contents of 0x020Ah
 
             mov.w   #0x0102, SR             ; Set N and V bits in SR to 1
