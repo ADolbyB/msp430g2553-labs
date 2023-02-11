@@ -11,7 +11,4 @@ For the C programming, [Energia IDE](https://energia.nu/download/) is a much mor
 
 ### Notes:
 
-The Assembly Code portion of this repo, when viewed in GitHub, shows very messy code formatting for some reason.
-When the repo is downloaded and imported to VS Code and then viewed (I did this as a test), the formatting is proper.
-So, sorry for the strange messy format, but just DL the code and it should show up with the correct format.
-All the code written in C Language does not have this problem when viewed on GitHub.
+Update: All assembly code has been updated for neatness and proper formatting. I had originally used multiple `tabs` to delimit commands and comments with proper spacing, but this became problematic for display in GitHub. I replaced all the `tabs` with `spaces` and now the code is properly formatted.
