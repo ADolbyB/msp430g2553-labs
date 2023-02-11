@@ -129,7 +129,7 @@ REPFR       mov.w   #LIST_IN, R4            ; set pointer to LIST_IN array
             mov.w   R5, R6                  ; save R6 as pointer where m needs to be stored
             clr     R10                     ; counter for updated m number
 
-           ;get the 'n' number and exit if the array is empty
+            ;get the 'n' number and exit if the array is empty
             mov.w   @R4+, R11               ; save n number in R11 as a loop counter
             jz      DONE                    ; exit if LIST_IN is empty
             incd.w  R5                      ; manually increment the pointer to LIST_OUT array
