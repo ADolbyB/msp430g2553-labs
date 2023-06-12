@@ -36,13 +36,13 @@ MUL:        push.w  R5                      ; Push current values to the stack
             and.w   #0x00FF, R5             ; clear upper 8 bits of mltiplier
             and.w   #0x00FF, R6             ; clear upper 8 bits of multipliant
 
-nextbit	    rrc.w   R5                      ; shift multiplier bits one at a time to the carry
+nextbit     rrc.w   R5                      ; shift multiplier bits one at a time to the carry
             jnc     twice                   ; if no carry skip the add
 
 addmore     add.w   R6, R7                  ; add a copy of the multiplicand to the accumulator
 twice       add.w   R6, R6                  ; multiplicand times 2, (shifted 1 bit left)
-            dec.w   R8			            ; decrement loop counter
-            jnz     nextbit		            ; jump to check next bit of the multiplier
+            dec.w   R8                      ; decrement loop counter
+            jnz     nextbit                 ; jump to check next bit of the multiplier
             mov.w   R7, R6                  ; save the result in R6
 
             pop.w   R8                      ; Restore previous values to the stack
