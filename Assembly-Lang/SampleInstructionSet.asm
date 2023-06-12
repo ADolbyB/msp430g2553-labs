@@ -24,7 +24,7 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 Setup       mov.w   #0AAAAh, R4             ; Setup for examples below
             mov.w   #1111h,  R5             ; Instruction SRC, DEST (Double Operand)
             mov.w   #3333h,  R6
-            mov.w   #1,  R7                ; Instruction DST (Single Operand) or Instruction SRC
+            mov.w   #1,  R7                 ; Instruction DST (Single Operand) or Instruction SRC
             mov.w   #2,  R8
 
 
@@ -74,10 +74,10 @@ Logic       mov.w   #0FAFAh, R5             ; Setting up example
             inv.w   R5                      ; Inverts each bit and stores it in DST
 
             mov.w   #0FAFAh, R5
-            bis.w   R6,  R5                 ;(R6 |= R5)
+            bis.w   R6,  R5                 ; (R6 |= R5)
 
             mov.w   #0FAFAh, R5
-            bic.w   R6,  R5                 ;(R6 &= /R5)
+            bic.w   R6,  R5                 ; (R6 &= /R5)
 
             mov.w   #4,  R8                 ; setting our loop counter
 Jumps       dec.w   R8                      ; decrementing the counter each loop
@@ -88,7 +88,8 @@ Jumps       dec.w   R8                      ; decrementing the counter each loop
 Loop        jmp     Loop
 
 Test        mov.w   #0FFFFh, R6             ;
-            ret                             ;returns you back to the line after the function call by pushing the current SP location's value into the PC
+            ret                             ; returns back to the line after function call
+                                            ; by pushing the current SP location's value into the PC
 
 ;-------------------------------------------------------------------------------
 ;           Stack Pointer definition
