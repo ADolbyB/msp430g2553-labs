@@ -22,7 +22,7 @@ void main(void)
     WDTCTL = WDTPW + WDTHOLD;               // Stop watchdog timer
     P1OUT  = 0x00;                          // Turn off all outputs initially
     
-    P1DIR |= (LED1 | LED2 );                // set P1.0 (LED1) and P1.6 (LED1) to outputs
+    P1DIR |= (LED1 | LED2);                 // set P1.0 (LED1 / Red) and P1.6 (LED2 / Green) to outputs
     P1REN |= BUTTON;                        // enable resistor on the button pin
     P1OUT |= BUTTON;                        // resistor becomes a pull up
     P1IES |= BUTTON;                        // interrupt edge select: HIGH to LOW
@@ -38,17 +38,18 @@ void main(void)
 #pragma vector = PORT1_VECTOR               // Port 1 interrupt service routine
 __interrupt void Port_1(void)
 {
-    P1OUT |=  LED2; __delay_cycles(10000);  // Turn LED2 (green) on
+    P1OUT |=  LED2;                         // Turn LED2 (green) on
+    __delay_cycles(10000); 
 
     folds ++;
     if (folds >= 4)                         // cycle folds for 1,2,3
     {
-        folds =1;
+        folds = 1;
     }
     
     for (j = 1; j <= 6; j++)                // run toggle logic 6 times
     {
-        P1OUT ^= (LED1);                    // toggle P1.0 using XOR
+        P1OUT ^= (LED1);                    // toggle P1.0 (Red LED) using XOR
         for(i = 1; i <= folds; i++)         // delay folds number of times
         {
             __delay_cycles(100000);
