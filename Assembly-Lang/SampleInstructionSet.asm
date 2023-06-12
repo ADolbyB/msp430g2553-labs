@@ -24,8 +24,8 @@ StopWDT     mov.w   #WDTPW|WDTHOLD,&WDTCTL  ; Stop watchdog timer
 Setup       mov.w   #0AAAAh, R4             ; Setup for examples below
             mov.w   #1111h,  R5             ; Instruction SRC, DEST (Double Operand)
             mov.w   #3333h,  R6
-            mov.w   #1,      R7             ; Instruction	DST    (Single Operand)	or Instruction    SRC
-            mov.w   #2,      R8
+            mov.w   #1,  R7                ; Instruction DST (Single Operand) or Instruction SRC
+            mov.w   #2,  R8
 
 
 
@@ -40,7 +40,7 @@ Movement    mov.w   R4,  R5                 ; Moves the value from the source to
             pop.b   R7                      ; (DST = 0(SP)) SP is post incremented
                                             ; Notice the values in address stays the same and only the SP is changed
 
-Addition    add.w   R6,  R4			        ;
+Addition    add.w   R6,  R4                 ;
             add.b   R6,  R4                 ; (DST += SRC)
             addc.w  #0FFFFh, R8             ; (DST += SRC + Carry)
             adc.w   R8                      ; (DST += Carry)
@@ -65,7 +65,7 @@ Logic       mov.w   #0FAFAh, R5             ; Setting up example
             and.w   R6,  R5                 ; Does the And operation for each bit and stores it in R6
 
             mov.w   #0FAFAh, R5
-			xor.w	R6,  R5                 ; Does the Xor operation for each bit and stores it in DST
+            xor.w   R6,  R5                 ; Does the Xor operation for each bit and stores it in DST
 
             mov.w   #0FAFAh, R5
             bit.w   R6,  R5                 ; Does the Or operation for each bit and stores it in DST
@@ -76,7 +76,7 @@ Logic       mov.w   #0FAFAh, R5             ; Setting up example
             mov.w   #0FAFAh, R5
             bis.w   R6,  R5                 ;(R6 |= R5)
 
-			mov.w	#0FAFAh,R5
+            mov.w   #0FAFAh, R5
             bic.w   R6,  R5                 ;(R6 &= /R5)
 
             mov.w   #4,  R8                 ; setting our loop counter
