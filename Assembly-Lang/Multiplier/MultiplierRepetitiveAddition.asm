@@ -30,7 +30,7 @@ loop        jmp     loop                    ; Failsafe: Jump in place forever
 
 MUL:        clr     R10                     ; Start repetitive addition
 
-addmore		add.w	R5, R10
+addmore     add.w   R5, R10
             dec.b   R6
             cmp.b   #0, R6
             jne     addmore
