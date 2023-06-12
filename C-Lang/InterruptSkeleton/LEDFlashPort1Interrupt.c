@@ -17,15 +17,15 @@ int i = 1;
 
 void main(void)
 {
-    WDTCTL = WDTPW + WDTHOLD; 	                            // Stop watchdog timer
-    P1OUT  = 0x00;				                            // set initial outputs to off.
+    WDTCTL = WDTPW + WDTHOLD;                               // Stop watchdog timer
+    P1OUT = 0x00;                                           // set initial outputs to off.
     
     P1DIR = (LED1 | LED2);                                  // set P1.0 and P1.6 to outputs
-    P1REN |= BUTTON; 			                            // enable resistor on button pin
-    P1OUT |= BUTTON; 			                            // pull up resistor for button
-    P1IES |= BUTTON; 			                            // interrupt edge select: HIGH to LOW
-    P1IE  |= BUTTON; 			                            // enable interrupt on selected pin
-    __enable_interrupt(); 		                            // enable interrupts
+    P1REN |= BUTTON;                                        // enable resistor on button pin
+    P1OUT |= BUTTON;                                        // pull up resistor for button
+    P1IES |= BUTTON;                                        // interrupt edge select: HIGH to LOW
+    P1IE  |= BUTTON;                                        // enable interrupt on selected pin
+    __enable_interrupt();                                   // enable interrupts
 
     for (;;)
     {
