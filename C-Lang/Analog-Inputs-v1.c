@@ -68,7 +68,6 @@ int main(void)
     temproom = temp;
     __delay_cycles(250);                                                // allow time for hardware to settle
 
-
     for (;;)
     {
         /** read light, touch, and temp repeatedly at the beginning of the main loop **/
@@ -134,15 +133,15 @@ int main(void)
             // DO NOTHING: This is a Dead-Zone for Hysteresis
         }
         else if (temp > (temproom * 1.04))                              // If the temperature is 4% warmer than the initial value
-            {
-                P1OUT |= BIT5;                                          // Turn Blue LED ON
-                __delay_cycles(200);
-            }
+        {
+            P1OUT |= BIT5;                                          // Turn Blue LED ON
+            __delay_cycles(200);
+        }
         else // if (temp < (temproom * 1.01))                           // If the temperature is lower than the Dead-Zone
-            {
-                P1OUT &= ~BIT5;                                         // Turn Blue LED OFF
-                __delay_cycles(200);
-            }
+        {
+            P1OUT &= ~BIT5;                                         // Turn Blue LED OFF
+            __delay_cycles(200);
+        }
 
         /********************************* section 3/3 *********************************
         - Touch Controlled LED3
@@ -154,38 +153,37 @@ int main(void)
         *********************************************************************************/
 
         if (touch < touchroom * 0.78)                                   // when the value of touch is approx < 800, toggle flag value
-            {                                                           // "touch" fluctuates from approx 160 - 750 when touched
-                if (flag == 0)                                          // Hysteresis "dead zone" approx = (800 < touch < 1023)
-                    {
-                        flag = 1;
-                    }
-                else // if (flag != 0)                                  // This section switches the control variable for the LED
-                    {
-                        flag = 0;
-                    }
-
-                __delay_cycles(1000);                                   // 0.001 second delay
-
-                while (touch < (touchroom * 0.78))                      // while your finger is on the touch sensor
-                    {
-                        getanalogvalues();                              // program "hangs" here until finger released from sensor.
-                        __delay_cycles(10000);                          // 0.01 second delay
-                    }
-
-                if (flag == 0)                                          // This section of code toggles the LED based on control variable
-                    {
-                        P2OUT &= ~BIT0;                                 // TURN LED off
-                        __delay_cycles(50000);                          // 0.05 second delay
-                    }
-                else // if (flag == 1)
-                    {
-                        P2OUT |= BIT0;                                  // TURN LED on
-                        __delay_cycles(50000);                          // 0.05 second delay
-                    }
+        {                                                           // "touch" fluctuates from approx 160 - 750 when touched
+            if (flag == 0)                                          // Hysteresis "dead zone" approx = (800 < touch < 1023)
+            {
+                flag = 1;
+            }
+            else // if (flag != 0)                                  // This section switches the control variable for the LED
+            {
+                flag = 0;
             }
 
-    }   // END infinite FOR LOOP
-}   // END MAIN LOOP
+            __delay_cycles(1000);                                   // 0.001 second delay
+
+            while (touch < (touchroom * 0.78))                      // while your finger is on the touch sensor
+            {
+                getanalogvalues();                              // program "hangs" here until finger released from sensor.
+                __delay_cycles(10000);                          // 0.01 second delay
+            }
+
+            if (flag == 0)                                          // This section of code toggles the LED based on control variable
+            {
+                P2OUT &= ~BIT0;                                 // TURN LED off
+                __delay_cycles(50000);                          // 0.05 second delay
+            }
+            else // if (flag == 1)
+            {
+                P2OUT |= BIT0;                                  // TURN LED on
+                __delay_cycles(50000);                          // 0.05 second delay
+            }
+        }
+    }   // END for(;;)
+}   // END main()
 
 /** Begin Function Definitions **/
 void ConfigureAdc(void)
@@ -214,18 +212,18 @@ void getanalogvalues()
     touch = 0;
 
     for(i = 1; i <= 5 ; i++)                                            // read all three analog values 5 times each and average
-        {
-            ADC10CTL0 &= ~ENC;
+    {
+        ADC10CTL0 &= ~ENC;
 
-            while (ADC10CTL1 & BUSY);                                   // Wait while ADC is busy
-            ADC10SA = (unsigned)&ADCReading[0];                         // RAM Address of ADC Data, must be reset every conversion
-            ADC10CTL0 |= (ENC | ADC10SC);                               // Start ADC Conversion
+        while (ADC10CTL1 & BUSY);                                   // Wait while ADC is busy
+        ADC10SA = (unsigned)&ADCReading[0];                         // RAM Address of ADC Data, must be reset every conversion
+        ADC10CTL0 |= (ENC | ADC10SC);                               // Start ADC Conversion
 
-            while (ADC10CTL1 & BUSY);                                   // Wait while ADC is busy
-            light += ADCReading[0];                                     // sum all 5 reading for the three variables
-            touch += ADCReading[1];
-            temp += ADCReading[2];
-        }
+        while (ADC10CTL1 & BUSY);                                   // Wait while ADC is busy
+        light += ADCReading[0];                                     // sum all 5 reading for the three variables
+        touch += ADCReading[1];
+        temp += ADCReading[2];
+    }
 
     light = light / 5;                                                  // Average the 5 readings to reduce fluctuations
     touch = touch / 5;                                                  // capacitors also help
