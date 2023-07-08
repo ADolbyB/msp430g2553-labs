@@ -15,7 +15,6 @@ This is a test program to test Input and Output with Interrupts
 // NEED to enable the pullup resistor for BUTTON / BIT3.
 
 unsigned int folds = 1;                     // Folds is a counting semaphore
-
 int i = 1;
 
 void main(void)
@@ -35,13 +34,13 @@ void main(void)
     __enable_interrupt();                   // enable interrupts in general
 
     for (;;)
-        {
-            P1OUT ^= (LED2);                // toggle LED2 using XOR (XOR w/ 1 to TOGGLE)
-            for(i = 1; i <= folds; i++)     // for folds number of times = 1, 2, or 3.
-                {                           // INTERRUPT Loop affects the value of 'folds'
-                    __delay_cycles(100000); // run delay of 100,000 micro seconds
-                }
+    {
+        P1OUT ^= (LED2);                    // toggle LED2 using XOR (XOR w/ 1 to TOGGLE)
+        for(i = 1; i <= folds; i++)         // for folds number of times = 1, 2, or 3.
+        {                                   // INTERRUPT Loop affects the value of 'folds'
+            __delay_cycles(100000);         // run delay of 100,000 micro seconds
         }
+    }
 } // end main
 
 /** Port 1 interrupt routine  */
@@ -49,19 +48,16 @@ void main(void)
 __interrupt void Port_1(void)               // change both lines to port2 to setup port 2 interrupt
 {
     P1OUT |= LED1;                          // LED1 on at start of interrupt service - VISUAL INSPECTION
-
     folds++;                                // increment folds (AFFECTS DELAY)
 
     if (folds >= 4)
-        {
-            folds = 1;                      // cycle folds for 1,2,3
-        }
+    {
+        folds = 1;                          // cycle folds for 1,2,3
+    }
 
     __delay_cycles(100000);                 // allow some delay to see LED1
-
     P1IFG &= ~BUTTON;                       // P1.3 IFG cleared - CLEARS INTERRUPT FLAG BIT - SELECTIVE CLEAR WITH MASK
 
     __delay_cycles(100000);                 // allow some delay for switch debounce
-
     P1OUT &= ~LED1;                         // LED1 OFF to indicate end of interrupt - VISUAL INSPECTION
 }                                           // END port 1 interrupt
