@@ -17,8 +17,8 @@ int main(void)
     P1DIR |= BIT0;
 	
 	for(;;)
-	{
-		b = b + 1;                          // increment variable
-		P1OUT ^= BIT0;                      // Toggle the LED on BIT0
-	}
+    {
+        b = b + 1;                          // increment variable
+        P1OUT ^= BIT0;                      // Toggle the LED on BIT0
+    }
 }
