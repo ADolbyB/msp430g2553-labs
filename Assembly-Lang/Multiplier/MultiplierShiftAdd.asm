@@ -33,8 +33,8 @@ MUL:        push.w  R5                      ; Push current values to the stack
             push.w  R8                      ;
             mov.w   #8, R8                  ; 8 bit multiplication, so we loop 8 times
             clr.w   R7                      ; additive accumulator should start with zero
-            and.w   #0x00FF, R5             ; clear upper 8 bits of mltiplier
-            and.w   #0x00FF, R6             ; clear upper 8 bits of multipliant
+            and.w   #0x00FF, R5             ; clear upper 8 bits of multiplier
+            and.w   #0x00FF, R6             ; clear upper 8 bits of multiplicand
 
 nextbit     rrc.w   R5                      ; shift multiplier bits one at a time to the carry
             jnc     twice                   ; if no carry skip the add
